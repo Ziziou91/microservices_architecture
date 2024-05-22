@@ -1,0 +1,27 @@
+---
+# use spaces not tabs
+apiVersion: apps/v1 # which api to use for deployment 
+kind: Deployment 
+
+metadata:
+  name: nginx-deployment # naming the deployment
+spec:
+  selector:
+    matchLabels:
+      app: nginx # look for this label to match with k8 service
+    # let's create a replica set of this with instance/pods
+  replicas: 3 # 3 pods
+  # template to use it's label for k8 service to launch in the browser
+  template:
+    metadata:
+      labels:
+        app: nginx
+  # inside template let's define the container spec
+    spec: 
+      containers: 
+      - name: nginx
+        image: ahskhan/nginx-254:latest # use the image that you built
+        ports: 
+        - containerPort: 80
+    
+
